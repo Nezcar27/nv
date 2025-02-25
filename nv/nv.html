@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botones Interactivos</title>
+
+    <!-- Enlace al archivo CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Centramos el contenido en la página */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        /* Contenedor de los botones */
+        .button-container {
+            margin-top: 20px;
+        }
+
+        /* Estilos para los botones */
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        /* Ocultar elementos */
+        .hidden {
+            display: none;
+        }
+
+        /* Estilos para el mensaje central */
+        #message {
+            font-size: 24px;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* Estilos para la imagen GIF */
+        #gifImage {
+            width: 200px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Texto principal -->
+    <h1 id="mainText">?</h1>
+
+    <!-- Imagen GIF -->
+    <img id="gifImage" src="principal.gif" alt="Animación divertida">
+
+    <!-- Contenedor de los botones -->
+    <div class="button-container" id="buttonContainer">
+        <button id="leftButton"> i</button>
+        <button id="rightButton">o</button>
+    </div>
+
+    <!-- Mensaje oculto -->
+    <div id="message">Citlaly, no tienes idea de lo feliz que me haces con tu 'sí'.
+         Desde hoy, cada día a tu lado será una nueva razón para sonreír.
+          Prometo cuidarte, hacerte reír y recordarte siempre lo increíble que eres. 
+          Eres un sueño hecho realidad,
+           y no puedo esperar para crear juntos momentos inolvidables. 💖✨</div>
+
+    <script>
+        let gifs = ["principal.gif", "mochi-cat.gif", "enojado.gif", "lloo2.gif"];
+        let texts = [
+            "ea",
+            "pz",
+            "tad",
+            " o"
+        ];
+
+        let specialGif = "final.gif";
+        let specialText = "¡Has desbloqueado un GIF especial!";
+        let gifIndex = 0;
+
+        document.getElementById("rightButton").addEventListener("click", function() {
+            let leftButton = document.getElementById("leftButton");
+            let rightButton = document.getElementById("rightButton");
+
+            let currentSize = window.getComputedStyle(leftButton).fontSize;
+            let newSize = parseFloat(currentSize) * 1.2 + "px";
+
+            if (parseFloat(currentSize) < 1000) { // Límite de tamaño máximo
+                leftButton.style.fontSize = newSize;
+            }
+
+            // Cambiar el GIF y el texto dentro del botón derecho
+            gifIndex = (gifIndex + 1) % gifs.length;
+            document.getElementById("gifImage").src = gifs[gifIndex];
+            rightButton.textContent = texts[gifIndex];
+        });
+
+        document.getElementById("leftButton").addEventListener("click", function() {
+            document.getElementById("mainText").classList.add("hidden");
+            document.getElementById("buttonContainer").classList.add("hidden");
+            document.getElementById("gifImage").src = specialGif;
+            document.getElementById("message").style.display = "block";
+        });
+    </script>
+</body>
+</html>
